@@ -1,20 +1,32 @@
 ---
-title: 'Release of Tailwind Nextjs Starter Blog v2.0'
-date: '2023-08-05'
-lastmod: '2023-08-05'
-tags: ['next-js', 'tailwind', 'guide', 'feature']
+title: 'Foco'
+date: '2024-01-10'
+lastmod: '2023-01-10'
+tags: ['pessoal']
 draft: false
-summary: 'Release of Tailwind Nextjs Starter Blog template v2.0, refactored with Nextjs App directory and React Server Components setup.Discover the new features and how to migrate from V1.'
+summary: 'Minha luta por foco quando o cargo exige saber e fazer de tudo'
 images: ['/static/images/twitter-card.png']
 ---
 
-## Introduction
+## Introdução
 
-Welcome to the release of Tailwind Nextjs Starter Blog template v2.0. This release is a major refactor of the codebase to support Nextjs App directory and React Server Components. Read on to discover the new features and how to migrate from V1.
+Ser fundador/CEO de uma startup não é uma tarefa fácil e existem diversos ótimos conteúdos falando sobre isso na internet.
+
+Mas algo que é pouco discutido e que é um objeto de pensamento constante por mim é o delicado balanço entre ser um "faz tudo" e um expert em algo.
+
+10 em cada 10 fontes de produtividade pessoal exaltam a importância de focar em uma, no máximo 3, coisas. 
+
+Recentemente li 2 livros que destacam muito bem a importância do foco em uma área para se tornar um destaque: Maestria e Direto ao Ponto. Quando li, fiquei bem intrigado e comecei a colocar em prática alguns dos ensinamentos. Quem não quer ser o melhor do mundo em algo?
+
+O problema é: como focar em uma área, quando o seu cargo exige que você seja bom em muitas áreas?
+
+Como fazer, quando durante o mesmo dia, você precisa tomar decisões (e muitas vezes não só tomar decisões, mas também executar) em áreas totalmente diferentes, como vendas, produto, design, código, marketing, finanças e RH?
+
+É isso que pretendo explorar nesse primeiro artigo. Minha jornada tentando equilibrar todos os pratos, ao mesmo tempo em que tento me tornar o melhor nas áreas em que considero relevante.
 
 <TOCInline toc={props.toc} exclude="Introduction" />
 
-## V1 to V2
+{/* ## V1 to V2
 
 ![Github Traffic](/static/images/github-traffic.png)
 
@@ -51,30 +63,9 @@ Typescript is also a perfect match with our new type-safe markdown processor - C
 
 [Contentlayer](https://www.contentlayer.dev/) is a content SDK that validates and transforms your content into type-safe JSON data that you can easily import into your application. It makes working with local markdown or MDX files a breeze. This replaces `MDX-bundler` and our own markdown processing workflow.
 
-First, a content source is defined, specifiying the name of the document type, the source where it is located along with the frontmatter fields and any additional computed fields that should be generated as part of the process.
+First, a content source is defined, specifiying the name of the document type, the source where it is located along with the frontmatter fields and any additional computed fields that should be generated as part of the process. */}
 
-```ts:contentlayer.config.ts
-export const Blog = defineDocumentType(() => ({
-  name: 'Blog',
-  filePathPattern: 'blog/**/*.mdx',
-  contentType: 'mdx',
-  fields: {
-    title: { type: 'string', required: true },
-    date: { type: 'date', required: true },
-    tags: { type: 'list', of: { type: 'string' }, default: [] },
-    ...
-  },
-  computedFields: {
-    readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
-    slug: {
-      type: 'string',
-      resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
-    }
-    ...
-  },
-}))
-```
-
+{/* 
 Contentlayer then processes the MDX files with our desired markdown remark or rehype plugins, validates the schema, generate type definitions and output json files that can be easily imported in our pages. Hot reloading comes out of the box, so edits to the markdown files will be reflected in the browser immediately!
 
 ## Pliny
@@ -109,8 +100,8 @@ To solve this, I have abstracted the logic to a separate repository - [Pliny](ht
   - Pre / Code block
   - Table of Contents
 
-Choose your preferred service by modifying `siteMetadata.js` and changing the appropriate fields. For example to change from Umami Analytics to Plausible, we can change the following fields:
-
+Choose your preferred service by modifying `siteMetadata.js` and changing the appropriate fields. For example to change from Umami Analytics to Plausible, we can change the following fields: */}
+{/* 
 ```diff-js:siteMetadata.js
 analytics: {
 -   umamiAnalytics: {
@@ -121,8 +112,8 @@ analytics: {
 +      plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
 +    },
 },
-```
-
+``` */}
+{/* 
 Changes in the configuration file gets propagated to the components automatically. No modification to the template is required.
 
 Under the hood, Pliny exports high level components such as `<Analytics analyticsConfig={analyticsConfig}/>` and `<Comments commentsConfig={commentsConfig}/>` which takes in a configuration object and renders the appropriate component. Since the layouts are defined on the server side, Next.js is able to use the configuration object to determine which component to render and send only the required component bundle to the client.
@@ -141,37 +132,6 @@ One of the most highly requested features have been added 🎉! The search compo
 
 [Kbar](https://github.com/timc1/kbar) is a fast, portable, and extensible cmd+k interface. The pliny implementation uses kbar to create a local search dialog box. The component loads a JSON file, default `search.json`, that was created in the contentlayer build process. Try pressing ⌘-k or ctrl-k to see the search bar in action!
 
-## Styling and Layout Updates
-
-### Theming
-
-`tailwind.config.js` has been updated to use tailwind typography defaults where possible and to use the built-in support for dark mode via the `prose-invert` class. This replaces the previous `prose-dark` class and configuration.
-
-The primary theme color is updated from `teal` to `pink` and the primary gray theme from `neutral` to `gray`.
-
-Inter is now replaced with Space Grotesk as the default font.
-
-### New Layouts
-
-Layout components available in the `layouts` directory, provide a simple way to customize the look and feel of the blog.[^2]
-
-The downside of building a popular template is that you start seeing multiple similar sites everywhere 😆. While users are encouraged to customized the layouts to their liking, having more layout options that are easily switchable promotes diversity and perhaps can be a good starting point for further customizations.
-
-In v2, I added a new post layout - `PostBanner`. It features a large banner image and a centered content container. Check out "[Pictures of Canada](/blog/pictures-of-canada)" blog post which has been updated to use the new layout.
-
-The default blog listing layout has also been updated to include a side bar with blog tags. The search bar in the previous layout has been replace with the new command palette search. To switch back to the old layout, simply change the pages that use the `ListLayoutWithTags` component back to the original `ListLayout`.
-
-## Migration Recommendations
-
-Due to the large changes in directory structure, setup and tooling, I recommend starting from a fresh template and copying existing content, followed by incrementally migrating changes over to the new template.
-
-Styling changes should be relatively minor and can be copied over from the old `tailwind.config.js` to the new one. If copying over, you might need to add back the `prose-dark` class to components that opt into tailwind typography styling. Do modify the font import in the root layout component to use the desired font of choice.
-
-Changes to the MDX processing pipeline and schema can be easily ported to the new Contentlayer setup. If there are changes to the frontmatter fields, you can modify the document type in `contentlayer.config.ts` to include the new fields. Custom plugins can be added to the `remarkPlugins` and `rehypePlugins` properties in the `makeSource` export of `contentlayer.config.ts`.
-
-Markdown layouts are no longer sourced automatically from the `layouts` directory. Instead, they have to be specified in the `layouts` object defined in `blog/[...slug]/page.tsx`.[^3]
-
-To port over larger components or pages, I recommend first specificing it as a client component by using the `"use client"` directive. Once it renders correctly, you can split the interactive components (parts that rely on `use` hooks) as a client component and keep the remaining code as a server component. Consult the comprehensive Next.js [migration guide](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#migrating-from-pages-to-app) for more details.
 
 ## Conclusion
 
@@ -181,10 +141,6 @@ I hope you enjoy the new features and improvements in V2. If you have any feedba
 
 Using the template? Support this effort by giving a star on GitHub, sharing your own blog and giving a shoutout on Twitter or be a project [sponsor](https://github.com/sponsors/timlrx).
 
-## Licence
-
-[MIT](https://github.com/timlrx/tailwind-nextjs-starter-blog/blob/main/LICENSE) © [Timothy Lin](https://www.timrlx.com)
-
 [^1]: The previous version injects Preact into the production build. However, this is no longer possible as it does not support React Server Components. While overall bundle size has increased to about 85kB, most of the content can be pre-rendered on the server side, resulting in a low first contentful paint and time to interactive. Using React throughtout also leads to more consistent behavior with external libraries and components.
 [^2]: This is different from Next.js App Directory layouts and are best thought of as reusable React containers.
-[^3]: This takes advantage of Server Components by making it simple to specify the layout of choice in the markdown file and match against the `layouts` object which is then used to render the appropriate layout component.
+[^3]: This takes advantage of Server Components by making it simple to specify the layout of choice in the markdown file and match against the `layouts` object which is then used to render the appropriate layout component. */}
