@@ -12,14 +12,14 @@ const siteMetadata = {
   socialBanner: '/static/images/twitter-card.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'luizgppires@gmail.com',
-  github: 'https://github.com',
-  twitter: 'https://twitter.com/Twitter',
-  facebook: 'https://facebook.com',
-  youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com',
-  threads: 'https://www.threads.net',
-  instagram: 'https://www.instagram.com',
-  locale: 'en-US',
+  github: 'https://github.com/lgsensio',
+  twitter: 'https://twitter.com/luizgppires',
+  facebook: 'https://facebook.com/sensioerp',
+  youtube: 'https://youtube.com/@Sensioindustrias',
+  linkedin: 'https://www.linkedin.com/in/luiz-guilherme-pires/',
+  threads: 'https://www.threads.net/luizgppires',
+  instagram: 'https://www.instagram.com/luizgppires',
+  locale: 'pt-br',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.

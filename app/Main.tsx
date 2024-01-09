@@ -29,7 +29,7 @@ export default function Home({ posts }) {
                     <dl>
                       <dt className="sr-only">Publicado em</dt>
                       <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                        <time dateTime={date}>{formatDate(date, 'pt-br')}</time>
                       </dd>
                     </dl>
                     <div className="space-y-5 xl:col-span-3">
@@ -59,7 +59,7 @@ export default function Home({ posts }) {
                           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           aria-label={`Read more: "${title}"`}
                         >
-                          Read more &rarr;
+                          Ler post &rarr;
                         </Link>
                       </div>
                     </div>
