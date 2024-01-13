@@ -74,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-WGV3M4LW57"></Script>
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-WGV3M4LW57" />
       <Script id="google-analytics">
         {`
           window.dataLayer = window.dataLayer || [];
